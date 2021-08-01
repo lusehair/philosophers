@@ -38,7 +38,8 @@ unsigned long instanttime(t_table *table);
 int     ret_index(t_table *table);
 void    safe_sleep(t_table *table, char type);
 bool    dead_or_not(t_table *table, int index, unsigned long time);
-
+bool    watcher(t_table *table);
+void     monitor(t_table *table, int index, char *msg);
 
 
 
@@ -59,6 +60,7 @@ void    philo_end_eat(t_table *table, int index);
 int     ft_atoi(const char *str);
 size_t		ft_strlen(const char *str);
 void	*ft_free_safe(void *ptr);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 
 #endif 

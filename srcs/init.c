@@ -60,10 +60,10 @@ int     init_data(t_data *data, int ac, char **av)
     data->timeEat = (unsigned long)ft_atoi(av[3]);
     data->timeSleep = (unsigned long)ft_atoi(av[4]);
     data->elements = ft_atoi(av[1]);
-    pthread_mutex_init(&data->tescouillesisdead,NULL);
+    pthread_mutex_init(&data->monitor,NULL);
     puts("merde");
     //data->isDead = false; 
-    //g_isDead = false;
+    g_isDead = false;
     if(ac == 6)
         data->maxEat = ft_atoi(av[5]);
     else
@@ -100,13 +100,57 @@ pthread_mutex_t     *init_forks(t_data data)
 // If ret > 0 the launching success (ret is the value of thread joined)
 */ 
 
+// int     diner_launcher(t_table *table)
+// {
+//     int i; 
+//     t_human *human; 
+//     void *ret; 
+
+//     ret = NULL;
+    
+
+//     i = 0;
+
+//     while(i < table->data.elements)
+//     {
+//         human = malloc(sizeof(t_human));
+//         human->index = i; 
+//         human->table = table;
+
+//         if((pthread_create(&table->philos[i].tPhilo, NULL, &philo_life, (void*)human)))
+//         {
+//             printf("Sorry, the philo %d (thread) can\'t eat : End Of Execution, Goodbye (!CREATE)\n", i +1);
+//             return (0);
+//         }
+//         usleep(200);
+//         i++;
+//     }
+//     i = 0;
+//     while(i < table->data.elements)
+//     {
+//         if (pthread_join(table->philos[i].tPhilo, &ret))
+//         {
+//             printf("Sorry, the philo %d (thread) can\'t eat : End Of Execution, Goodbye (!JOIN)\n", i + 1);
+//             return(0);
+//         }
+//         i++;
+//     }
+//     puts("after the loop");
+//     i = 0;
+//     while(i < table->data.elements)
+//     {
+//         pthread_mutex_destroy(&table->forks[i]);
+//         i++;
+//     }
+//     return (i);
+// }
+
+
 int     diner_launcher(t_table *table)
 {
     int i; 
     t_human *human; 
-    void *ret; 
 
-    ret = NULL;
     
 
     i = 0;
@@ -122,20 +166,10 @@ int     diner_launcher(t_table *table)
             printf("Sorry, the philo %d (thread) can\'t eat : End Of Execution, Goodbye (!CREATE)\n", i +1);
             return (0);
         }
-        usleep(200);
+        //usleep(200);
         i++;
     }
-    i = 0;
-    while(i < table->data.elements)
-    {
-        if (pthread_join(table->philos[i].tPhilo, &ret))
-        {
-            printf("Sorry, the philo %d (thread) can\'t eat : End Of Execution, Goodbye (!JOIN)\n", i + 1);
-            return(0);
-        }
-        i++;
-    }
-    puts("after the loop");
+    watcher(table);
     i = 0;
     while(i < table->data.elements)
     {

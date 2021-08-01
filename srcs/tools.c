@@ -97,7 +97,7 @@ void     monitor(t_table *table, int index, char *msg)
     printf("%ld ms philo %d %s\n", instanttime(table), index+1, msg);      
     
   
-    if((ft_strncmp(msg,"is dead")) != 0)
+    if((ft_strncmp(msg,"is dead", ft_strlen(msg))) != 0)
         pthread_mutex_unlock(&table->data.monitor);
 }
 
@@ -110,9 +110,9 @@ bool    watcher(t_table *table)
     {
             while(i < table->data.elements)
             {
-                if((table->philos[i].lastEat + table->data.timeDie) < instanttime(time))
+                if((instanttime(table) - table->philos[i].lastEat > table->data.timeDie))
                 {
-                    g_isDead == true;
+                    g_isDead = true;
                     monitor(table,i,"is dead");
                     break;
                 }

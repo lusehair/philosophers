@@ -35,7 +35,7 @@ int     philo_dead(t_table *table, int index)
 
     i = 0; 
     //if(table->philos[index].state == 'D')
-    monitor(table,index,'D');   
+    //monitor(table,index,);   
     while(i < table->data.elements)
     {
         //state = table->philos[index].state;
@@ -83,17 +83,15 @@ void     *philo_life(void *tab)
         monitor(table, index, "is thinking");
         fork = 1;
         while(fork != 0)
-        {
             fork = if_take_one_fork(table,index);
-        }
         fork = 1;
-        while(fork)
-        {               
+        while(fork)               
             fork = if_take_two_fork(table,index);
-        }
         fork = is_eating(table, index); 
-        //  if(fork == table->data.maxEat)
-        //     return(NULL);
+        is_sleep(table,index);
+
     }
+    pthread_mutex_unlock(table->philos[index].forkRight);
+    pthread_mutex_unlock(table->philos[index].forkLeft);
     return(NULL);
 }
