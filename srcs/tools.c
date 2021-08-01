@@ -116,6 +116,11 @@ bool    watcher(t_table *table)
                     monitor(table,i,"is dead");
                     break;
                 }
+                if(table->philos[i].numEat > table->data.maxEat)
+                {
+                    g_isDead = true;
+                    return (true);
+                }
                 i++;
             }
             i = 0;
