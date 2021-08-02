@@ -16,14 +16,14 @@ int     is_sleep(t_table *table, int index)
 
 void     *philo_life(void *tab)
 {
-    int fork;
+    //int fork;
     int index;
     t_human *human;
     t_table *table;
 
     human = tab;
     table = human->table; 
-    fork = 1;
+    //fork = 1;
     index = human->index;
     ft_free_safe(tab);
     if(table->philos[index].PIO == 'P')
@@ -32,18 +32,18 @@ void     *philo_life(void *tab)
     while(g_isDead == false)
     {
         monitor(table, index, "is thinking");
-        fork = 1;
-        while(fork != 0)
-            fork = if_take_one_fork(table,index);
-        fork = 1;
-        while(fork)               
-            fork = if_take_two_fork(table,index);
-        fork = is_eating(table, index); 
+        //fork = 1;
+        //while(fork)
+             if_take_one_fork(table,index);
+        //fork = 1;
+        //while(fork)               
+            if_take_two_fork(table,index);
+        is_eating(table, index); 
         is_sleep(table,index);
-        // if(fork == table->data.maxEat)
-        //     break;
     }
+    //printf("proper exit from %d", index +1);
     pthread_mutex_unlock(table->philos[index].forkRight);
     pthread_mutex_unlock(table->philos[index].forkLeft);
+   
     return(NULL);
 }

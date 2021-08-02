@@ -77,6 +77,13 @@ bool    watcher(t_table *table)
                     maxEatPhilo++;
                 }
                 i++;
+                if(maxEatPhilo == table->data.elements)
+                {
+                    
+                    g_isDead = true;
+                    
+                    return(true);
+                }
             }
             i = 0;
     }

@@ -103,19 +103,30 @@ int     diner_launcher(t_table *table)
         }
        i++;
        //usleep(500);
-    //ft_free_safe(human);
     }
-    watcher(table);
-    pthread_mutex_destroy(&table->data.monitor);
     i = 0;
+   
+    watcher(table);
     while(i < table->data.elements)
     {
-        pthread_mutex_destroy(&table->forks[i]);
+        // puts("THE END");
+        // printf("The index is %d\n", i +1);
+        pthread_join(table->philos[i].tPhilo,NULL);
+        //pthread_mutex_destroy(&table->forks[i]);
+        //ft_free_safe(&table->philos[i]);
         i++;
     }
+    usleep(200);
+  
+    pthread_mutex_destroy(&table->data.monitor);
+    i = 0;
+    //while(i < table->data.elements)
+    // {
+    //     pthread_mutex_destroy(&table->forks[i]);
+    //     i++;
+    // }
     ft_free_safe(table->forks);
     ft_free_safe(table->philos);
-    //ft_free_safe(table);
     free(human);
     i = 0;
     return (i);
