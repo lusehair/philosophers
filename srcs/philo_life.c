@@ -22,40 +22,10 @@ void    philo_end_eat(t_table *table, int index)
         {
             pthread_mutex_unlock(table->philos[index].forkLeft);
             pthread_mutex_unlock(table->philos[index].forkRight);
-            //pthread_mutex_destroy(table->philos[index].forkLeft);
-            //pthread_mutex_destroy(table->philos[index].forkRight);
+            
         }
 }
 
-
-int     philo_dead(t_table *table, int index)
-{
-    int i; 
-    //char state;
-
-    i = 0; 
-    //if(table->philos[index].state == 'D')
-    //monitor(table,index,);   
-    while(i < table->data.elements)
-    {
-        //state = table->philos[index].state;
-        // D for DEAD and M for EatMax
-        if(table->philos[i].state == 'E')
-        {
-            if(index != -1)
-            {
-                pthread_mutex_unlock(table->philos[index].forkLeft);
-                pthread_mutex_unlock(table->philos[index].forkRight);
-                //pthread_mutex_destroy(table->philos[index].forkLeft);
-                //pthread_mutex_destroy(table->philos[index].forkRight);
-            }
-            return (1);
-        }
-        i++;
-    }
-
-    return(0);
-}
 
 /*
 // philosopher life with all process functions 

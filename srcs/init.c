@@ -94,57 +94,6 @@ pthread_mutex_t     *init_forks(t_data data)
 }
 
 
-/*
-// Create and init the threads (philos)
-// If ret value is 0, we have a problem (cannot create thread or join thread)
-// If ret > 0 the launching success (ret is the value of thread joined)
-*/ 
-
-// int     diner_launcher(t_table *table)
-// {
-//     int i; 
-//     t_human *human; 
-//     void *ret; 
-
-//     ret = NULL;
-    
-
-//     i = 0;
-
-//     while(i < table->data.elements)
-//     {
-//         human = malloc(sizeof(t_human));
-//         human->index = i; 
-//         human->table = table;
-
-//         if((pthread_create(&table->philos[i].tPhilo, NULL, &philo_life, (void*)human)))
-//         {
-//             printf("Sorry, the philo %d (thread) can\'t eat : End Of Execution, Goodbye (!CREATE)\n", i +1);
-//             return (0);
-//         }
-//         usleep(200);
-//         i++;
-//     }
-//     i = 0;
-//     while(i < table->data.elements)
-//     {
-//         if (pthread_join(table->philos[i].tPhilo, &ret))
-//         {
-//             printf("Sorry, the philo %d (thread) can\'t eat : End Of Execution, Goodbye (!JOIN)\n", i + 1);
-//             return(0);
-//         }
-//         i++;
-//     }
-//     puts("after the loop");
-//     i = 0;
-//     while(i < table->data.elements)
-//     {
-//         pthread_mutex_destroy(&table->forks[i]);
-//         i++;
-//     }
-//     return (i);
-// }
-
 
 int     diner_launcher(t_table *table)
 {
@@ -170,11 +119,18 @@ int     diner_launcher(t_table *table)
         i++;
     }
     watcher(table);
+    pthread_mutex_destroy(&table->data.monitor);
+
     i = 0;
     while(i < table->data.elements)
     {
         pthread_mutex_destroy(&table->forks[i]);
         i++;
     }
+    i = 0;
+    // while(i < table->data.elements)
+    // {
+    //     free(&table->philos[i]);
+    // }
     return (i);
 }

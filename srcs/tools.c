@@ -32,29 +32,6 @@ unsigned long instanttime(t_table *table)
 
 
 
-
-/*
-// Give the index of the current thread. use this function just one time, at the init of thread. 
-*/ 
-
-int     ret_index(t_table *table)
-{
-    int ret; 
-
-    ret = 0;
-    
-    while(ret < table->data.elements)
-    {
-        if(table->philos[ret].state == notinit)
-        {
-            printf("Is The Ret %d\n", ret);
-            return (ret);
-        }
-        ret++;
-    }
-    return(ret);
-}
-
 void    safe_sleep(t_table *table, char type)
 {
     unsigned long endSleep; 
@@ -66,29 +43,6 @@ void    safe_sleep(t_table *table, char type)
     while(instanttime(table) < endSleep)
         usleep(100);
             
-}
-
-bool    dead_or_not(t_table *table, int index, unsigned long time)
-{
-    unsigned long last = table->philos[index].lastEat;
-    
-    if(time - last >= table->data.timeDie)
-    {
-        philo_end_eat(table,index);
-        printf("This is the time : %ld and the last : %ld and the timedie %ld\n", time, last, table->data.timeDie);
-        //printf("The ")
-        if(g_isDead == false)
-            printf("%ld Philo %d died\n", instanttime(table),index );
-        g_isDead = true; 
-        return (true);
-    }
-    else if(g_isDead == true)
-    {
-        philo_end_eat(table, index);
-        return(true);
-    }
-    else
-        return(false);
 }
 
 void     monitor(t_table *table, int index, char *msg)
@@ -104,23 +58,31 @@ void     monitor(t_table *table, int index, char *msg)
 bool    watcher(t_table *table)
 {
     int i; 
+    int maxEatPhilo;
+
     i = 0;
+    maxEatPhilo = 1;
 
     while(g_isDead == false)
     {
             while(i < table->data.elements)
             {
+                if (maxEatPhilo == table->data.maxEat)
+                {
+                    g_isDead = true;
+                    return (true);
+                }
                 if((instanttime(table) - table->philos[i].lastEat > table->data.timeDie))
                 {
                     g_isDead = true;
                     monitor(table,i,"is dead");
                     break;
                 }
-                if(table->philos[i].numEat > table->data.maxEat)
+                if((table->philos[i].numEat > table->data.maxEat) && table->data.maxEat != -1)
                 {
-                    g_isDead = true;
-                    return (true);
+                    maxEatPhilo++;
                 }
+                
                 i++;
             }
             i = 0;

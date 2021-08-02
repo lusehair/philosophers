@@ -16,6 +16,7 @@ int     main(int ac, char **av)
     diner_launcher(&table);
     ft_free_safe(table.forks);
     ft_free_safe(table.philos);
+    
     return (0);
 
 }
