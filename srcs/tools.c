@@ -48,10 +48,10 @@ void    safe_sleep(t_table *table, char type)
 void     monitor(t_table *table, int index, char *msg)
 {
     pthread_mutex_lock(&table->data.monitor);
-    printf("%ld ms philo %d %s\n", instanttime(table), index+1, msg);      
+    if (g_isDead == false)
+        printf("%ld ms philo %d %s\n", instanttime(table), index+1, msg);      
     
-  
-    if((ft_strncmp(msg,"is dead", ft_strlen(msg))) != 0)
+    //if((ft_strncmp(msg,"is dead", ft_strlen(msg))) != 0)
         pthread_mutex_unlock(&table->data.monitor);
 }
 
@@ -68,24 +68,23 @@ bool    watcher(t_table *table)
             {
                 if((instanttime(table) - table->philos[i].lastEat > table->data.timeDie))
                 {
-                    g_isDead = true;
                     monitor(table,i,"is dead");
+                    g_isDead = true;
                     break;
                 }
                 if((table->philos[i].numEat > table->data.maxEat) && table->data.maxEat != -1)
-                {
                     maxEatPhilo++;
-                }
                 i++;
                 if(maxEatPhilo == table->data.elements)
                 {
-                    
                     g_isDead = true;
-                    
-                    return(true);
+                    break;
                 }
             }
+            if(g_isDead == true)
+                break;
             i = 0;
     }
+    usleep(500);
     return (true);
 }

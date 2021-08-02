@@ -112,7 +112,7 @@ int     diner_launcher(t_table *table)
         // puts("THE END");
         // printf("The index is %d\n", i +1);
         pthread_join(table->philos[i].tPhilo,NULL);
-        //pthread_mutex_destroy(&table->forks[i]);
+        pthread_mutex_destroy(&table->forks[i]);
         //ft_free_safe(&table->philos[i]);
         i++;
     }

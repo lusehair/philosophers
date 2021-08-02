@@ -41,7 +41,7 @@ void     *philo_life(void *tab)
         is_eating(table, index); 
         is_sleep(table,index);
     }
-    //printf("proper exit from %d", index +1);
+    //printf("proper exit from %d\n", index +1);
     pthread_mutex_unlock(table->philos[index].forkRight);
     pthread_mutex_unlock(table->philos[index].forkLeft);
    

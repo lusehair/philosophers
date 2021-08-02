@@ -55,10 +55,11 @@ int     is_eating(t_table *table, int index)
             return(table->data.maxEat);
     }
     monitor(table,index, "is eating");
+        table->philos[index].lastEat = instanttime(table);
+
     safe_sleep(table,'E');
     ret += pthread_mutex_unlock(fork1);
     ret += pthread_mutex_unlock(fork2);
-    table->philos[index].lastEat = instanttime(table);
     return (ret);
 }
 
