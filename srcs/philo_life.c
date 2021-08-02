@@ -2,28 +2,9 @@
 
 int     is_sleep(t_table *table, int index)
 {
-    table->philos[index].state = 'A';
-    printf("%ld ms Philo %d is sleeping\n", instanttime(table), index + 1);
+    monitor(table,index,"is sleeping");
     safe_sleep(table, 'S');
-    //printf("%ld ms Philo %d is thinkng\n",instanttime(table), index + 1 );
-    table->philos[index].state = 'A';
     return(0);
-}
-
-/*
-// check si des philos sont morts, si oui alors il unlock son mutex et le destroy si non il renvoie index;
-// si le thread appellant est lui même mort, alors il affiche le message de sa mort. 
-*/ 
-
-
-void    philo_end_eat(t_table *table, int index)
-{
-        if(table->philos[index].state == 'E')
-        {
-            pthread_mutex_unlock(table->philos[index].forkLeft);
-            pthread_mutex_unlock(table->philos[index].forkRight);
-            
-        }
 }
 
 
@@ -59,7 +40,8 @@ void     *philo_life(void *tab)
             fork = if_take_two_fork(table,index);
         fork = is_eating(table, index); 
         is_sleep(table,index);
-
+        // if(fork == table->data.maxEat)
+        //     break;
     }
     pthread_mutex_unlock(table->philos[index].forkRight);
     pthread_mutex_unlock(table->philos[index].forkLeft);

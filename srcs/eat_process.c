@@ -49,16 +49,16 @@ int     is_eating(t_table *table, int index)
     fork1 = table->philos[index].forkLeft;
     fork2 = table->philos[index].forkRight;
     if(table->data.maxEat != -1)
+    {
         table->philos[index].numEat++;
-    table->philos[index].state = 'E';
+        if(table->philos[index].numEat == table->data.maxEat + 1)
+            return(table->data.maxEat);
+    }
     monitor(table,index, "is eating");
     safe_sleep(table,'E');
     ret += pthread_mutex_unlock(fork1);
     ret += pthread_mutex_unlock(fork2);
-    table->philos[index].state = 'A';
     table->philos[index].lastEat = instanttime(table);
-    if(table->philos[index].numEat == table->data.maxEat)
-        return(table->data.maxEat);
     return (ret);
 }
 

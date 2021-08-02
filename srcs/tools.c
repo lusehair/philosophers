@@ -41,7 +41,7 @@ void    safe_sleep(t_table *table, char type)
     else
         endSleep = instanttime(table) + table->data.timeEat; 
     while(instanttime(table) < endSleep)
-        usleep(100);
+        usleep(300);
             
 }
 
@@ -62,16 +62,10 @@ bool    watcher(t_table *table)
 
     i = 0;
     maxEatPhilo = 1;
-
     while(g_isDead == false)
     {
             while(i < table->data.elements)
             {
-                if (maxEatPhilo == table->data.maxEat)
-                {
-                    g_isDead = true;
-                    return (true);
-                }
                 if((instanttime(table) - table->philos[i].lastEat > table->data.timeDie))
                 {
                     g_isDead = true;
@@ -82,7 +76,6 @@ bool    watcher(t_table *table)
                 {
                     maxEatPhilo++;
                 }
-                
                 i++;
             }
             i = 0;
