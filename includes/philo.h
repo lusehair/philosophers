@@ -19,6 +19,8 @@ pthread_mutex_t     *init_forks(t_data data);
 t_philo     *init_philos(t_data data);
 int     diner_launcher(t_table *table);
 void    fork_dispatch(t_table *table);
+int     arg_checker(int ac, char**av);
+int     value_checker(int ac, char **av);
 
 
 /*
@@ -61,6 +63,7 @@ int     ft_atoi(const char *str);
 size_t		ft_strlen(const char *str);
 void	*ft_free_safe(void *ptr);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_isdigit(int c);
 
 
 #endif 

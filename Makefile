@@ -6,7 +6,7 @@
 #    By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/05 15:41:26 by lusehair          #+#    #+#              #
-#    Updated: 2021/08/02 15:28:29 by lusehair         ###   ########.fr        #
+#    Updated: 2021/08/03 13:44:16 by lusehair         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ HEADER_FILE = $(HEADER_DIR)/philo.h \
 			  $(HEADER_DIR)/structs.h
 
 SRC_FILE = $(SRC_DIR)/init.c \
-			$(SRC_DIR)/eat_process.c \
 			$(SRC_DIR)/tools.c \
 			$(SRC_DIR)/philo_life.c \
 			$(SRC_DIR)/main.c \

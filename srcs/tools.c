@@ -18,18 +18,12 @@ unsigned long realtime(void)
 unsigned long instanttime(t_table *table)
 {
     unsigned long ret; 
+    pthread_mutex_lock(&table->data.time);
     ret = realtime() - table->data.realtime; 
+    pthread_mutex_unlock(&table->data.time);
+
     return(ret);
 }
-
-
-// /* DEV TOOLS */ 
-
-// void    show_data(t_table *table)
-// {
-//     printf("The Time to die : %ld\n The Time to die : %ld\n The Time to die : %ld\n")
-// }
-
 
 
 void    safe_sleep(t_table *table, char type)
@@ -50,9 +44,7 @@ void     monitor(t_table *table, int index, char *msg)
     pthread_mutex_lock(&table->data.monitor);
     if (g_isDead == false)
         printf("%ld ms philo %d %s\n", instanttime(table), index+1, msg);      
-    
-    //if((ft_strncmp(msg,"is dead", ft_strlen(msg))) != 0)
-        pthread_mutex_unlock(&table->data.monitor);
+    pthread_mutex_unlock(&table->data.monitor);
 }
 
 bool    watcher(t_table *table)
@@ -68,7 +60,7 @@ bool    watcher(t_table *table)
             {
                 if((instanttime(table) - table->philos[i].lastEat > table->data.timeDie))
                 {
-                    monitor(table,i,"is dead");
+                    monitor(table,i,"died");
                     g_isDead = true;
                     break;
                 }
@@ -76,15 +68,9 @@ bool    watcher(t_table *table)
                     maxEatPhilo++;
                 i++;
                 if(maxEatPhilo == table->data.elements)
-                {
-                    g_isDead = true;
-                    break;
-                }
+                    g_isDead = true;    
             }
-            if(g_isDead == true)
-                break;
             i = 0;
     }
-    usleep(500);
     return (true);
 }

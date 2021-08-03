@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 09:58:09 by lusehair          #+#    #+#             */
-/*   Updated: 2021/07/30 17:48:44 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/03 12:51:06 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,12 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n)
 			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 	}
 	return (0);
+}
+
+int		ft_isdigit(int c)
+{
+	if ((c >= '0') && (c <= '9'))
+		return (1);
+	else
+		return (0);
 }

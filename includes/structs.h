@@ -51,6 +51,8 @@ typedef struct t_data
     unsigned long realtime;
     bool isDead; 
     pthread_mutex_t monitor;
+    pthread_mutex_t time;
+
 
 }              t_data;
 

@@ -7,7 +7,7 @@ int     main(int ac, char **av)
 {
   t_table table;
 
-    if (init_data(&table.data, ac, av) == -1)
+    if (init_data(&table.data, ac, av))
         return(-1);
     table.philos = init_philos(table.data);
     table.forks = init_forks(table.data);
