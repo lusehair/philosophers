@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/03 20:01:21 by lusehair          #+#    #+#             */
+/*   Updated: 2021/08/03 20:01:44 by lusehair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
@@ -11,23 +23,6 @@
 
 bool  g_isDead;
 
-
-/* 
-// STRUCTURES 
-*/ 
-
-// typedef struct t_fork
-// {
-//     int index;
-//     char isTaken;
-//     void *AddrPhilo;
-//     pthread_mutex_t mFork;  
-
-// }               t_fork;
-
-
-
-
 typedef struct t_philo
 {
     int index;
@@ -37,8 +32,6 @@ typedef struct t_philo
     unsigned long lastEat;
     char PIO;
     pthread_t tPhilo;
-    char state; 
-    bool *isDead;
 }               t_philo;
 
 typedef struct t_data
@@ -49,22 +42,9 @@ typedef struct t_data
     unsigned long timeSleep;
     int maxEat;
     unsigned long realtime;
-    bool isDead; 
     pthread_mutex_t monitor;
     pthread_mutex_t time;
-
-
 }              t_data;
-
-enum state{
-    notinit = -2,
-    dead = -1,
-    took_a_fork = 1,
-    thinking = 0,
-    eating = 4,
-    sleeping = 3,
-    init = 2,
-};
 
 typedef struct t_table
 {

@@ -1,3 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_life.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/03 13:52:14 by lusehair          #+#    #+#             */
+/*   Updated: 2021/08/03 20:02:23 by lusehair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+
 #include "../includes/philo.h"
 
 
@@ -22,9 +36,6 @@ int     if_take_one_fork(t_table *table, int index)
         monitor(table, index, "has taken a fork");
     return (ret);
 }
-
-
-
 
 int     if_take_two_fork(t_table *table, int index)
 {
@@ -69,17 +80,10 @@ int     is_eating(t_table *table, int index)
 
 int     is_sleep(t_table *table, int index)
 {
-    monitor(table,index,"is sleeping");
+    monitor(table, index, "is sleeping");
     safe_sleep(table, 'S');
     return(0);
 }
-
-
-/*
-// philosopher life with all process functions 
-// ret = -1 if the philo died;
-// ret = 1 if philo as eat enought 
-*/ 
 
 void     *philo_life(void *tab)
 {
@@ -97,10 +101,10 @@ void     *philo_life(void *tab)
     while (g_isDead == false)
     {
         monitor(table, index, "is thinking");
-        if_take_one_fork(table,index);
-        if_take_two_fork(table,index);
+        if_take_one_fork(table, index);
+        if_take_two_fork(table, index);
         is_eating(table, index); 
-        is_sleep(table,index);
+        is_sleep(table, index);
     }
     pthread_mutex_unlock(table->philos[index].forkRight);
     pthread_mutex_unlock(table->philos[index].forkLeft);
