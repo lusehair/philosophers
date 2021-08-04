@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:58:38 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/04 20:47:28 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/04 21:07:08 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	destroy(t_table *table)
 		pthread_mutex_destroy(&table->forks[i]);
 		i++;
 	}
-	
 	pthread_mutex_destroy(&table->data.monitor);
 	pthread_mutex_destroy(&table->data.time);
 	ft_free_safe(table->forks);

@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:52:14 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/04 20:49:36 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/04 21:14:40 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,12 @@ int	is_eating(t_table *table, int index)
 	fork2 = table->philos[index].forkRight;
 	if (table->data.maxEat != -1)
 	{
+		if (table->philos[index].numEat == table->data.maxEat)
+		{
+			table->philos[index].numEat = -1;
+			return (0);
+		}
 		table->philos[index].numEat++;
-		if (table->philos[index].numEat == table->data.maxEat + 1)
-			return (table->data.maxEat);
 	}
 	monitor(table, index, "is eating");
 	table->philos[index].lastEat = instanttime(table);
@@ -91,6 +94,11 @@ void	*philo_life(void *tab)
 		if_take_one_fork(table, index);
 		if_take_two_fork(table, index);
 		is_eating(table, index);
+		if(table->philos[index].numEat == -1)
+		{
+			//puts("not here");
+			break;
+		}
 		is_sleep(table, index);
 	}
 	pthread_mutex_unlock(table->philos[index].forkRight);
