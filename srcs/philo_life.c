@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:52:14 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/04 14:17:53 by lucasseha        ###   ########.fr       */
+/*   Updated: 2021/08/04 20:49:36 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ void	*philo_life(void *tab)
 	table = human->table;
 	index = human->index;
 	ft_free_safe(tab);
+	table->philos[index].lastEat = instanttime(table);
 	if (table->philos[index].PIO == 'P')
 		is_sleep(table, index);
-	table->philos[index].lastEat = instanttime(table);
 	while (g_isDead == false)
 	{
 		monitor(table, index, "is thinking");

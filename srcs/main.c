@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:58:38 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/04 13:51:21 by lucasseha        ###   ########.fr       */
+/*   Updated: 2021/08/04 20:47:28 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ int	destroy(t_table *table)
 	int	i;
 
 	i = 0;
+	if (table->data.elements == 1)
+		pthread_detach(table->philos[i].tPhilo);
 	while (i < table->data.elements)
 	{
-		pthread_join(table->philos[i].tPhilo, NULL);
+		if (table->data.elements)
+			pthread_join(table->philos[i].tPhilo, NULL);
 		pthread_mutex_destroy(&table->forks[i]);
 		i++;
 	}
+	
 	pthread_mutex_destroy(&table->data.monitor);
 	pthread_mutex_destroy(&table->data.time);
 	ft_free_safe(table->forks);
