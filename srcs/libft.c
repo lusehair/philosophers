@@ -6,32 +6,29 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 09:58:09 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/03 12:51:06 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/04 14:01:49 by lucasseha        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-
-
-size_t		ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])
 	{
 		i++;
 	}
-	return(i);
+	return (i);
 }
 
-
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	int	i;
-	int num;
-	int neg;
+	int	num;
+	int	neg;
 
 	i = 0;
 	num = 0;
@@ -65,8 +62,7 @@ void	*ft_free_safe(void *ptr)
 	return (ptr);
 }
 
-
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 
@@ -81,7 +77,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-int		ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
 	if ((c >= '0') && (c <= '9'))
 		return (1);

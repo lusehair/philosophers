@@ -6,112 +6,111 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:58:38 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/03 20:02:38 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/04 13:51:21 by lucasseha        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int     destroy(t_table *table)
+int	destroy(t_table *table)
 {
-    int i;
+	int	i;
 
-
-    i = 0;
-    while(i < table->data.elements)
-    {
-        pthread_join(table->philos[i].tPhilo, NULL);
-        pthread_mutex_destroy(&table->forks[i]);
-        i++;
-    }
-    pthread_mutex_destroy(&table->data.monitor);
-    pthread_mutex_destroy(&table->data.time);
-    ft_free_safe(table->forks);
-    ft_free_safe(table->philos);
-    return (0);
+	i = 0;
+	while (i < table->data.elements)
+	{
+		pthread_join(table->philos[i].tPhilo, NULL);
+		pthread_mutex_destroy(&table->forks[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&table->data.monitor);
+	pthread_mutex_destroy(&table->data.time);
+	ft_free_safe(table->forks);
+	ft_free_safe(table->philos);
+	return (0);
 }
 
-
-int     arg_checker(int ac, char**av)
+int	arg_checker(int ac, char**av)
 {
-    int i;
-    int c;
+	int		i;
+	int		c;
 
-    i = 1;
-    c = 0;
-    while (i< ac)
-    {
-        while (c < (int)ft_strlen(av[i]))
-        {
-            if (!ft_isdigit(av[i][c]))
-            {
-                printf("|%s| is not a good value (only numbers required)\n", av[i]);
-                return(1);
-            }
-        c++;
-        }
-        c = 0;
-    i++;
-    }
-    if (ac != 5 && ac != 6)
-    {
-       printf("You have %d arguments, must be 4 or 5 arguments. Goodbye\n", ac);
-       return (1);
-    }
-    return (value_checker(ac, av));
+	i = 1;
+	c = 0;
+	while (i < ac)
+	{
+		while (c < (int)ft_strlen(av[i]))
+		{
+			if (!ft_isdigit(av[i][c]))
+			{
+				printf("not a good value (only numbers required)\n");
+				return (1);
+			}
+			c++;
+		}
+		c = 0;
+		i++;
+	}
+	if (ac != 5 && ac != 6)
+	{
+		printf("must be 4 or 5 arguments. Goodbye\n");
+		return (1);
+	}
+	return (value_checker(ac, av));
 }
 
-int     value_checker(int ac, char **av)
+int	value_checker(int ac, char **av)
 {
-    int i; 
+	int		i;
 
-    i = 1;
-    while (i < ac)
-    {
-        if (ft_atoi(av[i]) <= 0)
-        {
-            printf("|%s| is not a good value (more than) 0)\n", av[i]);
-            return (1);
-        }
-        i++;
-    }
-    return (0);
+	i = 1;
+	while (i < ac)
+	{
+		if (ft_atoi(av[i]) <= 0)
+		{
+			printf("|%s| is not a good value (more than) 0)\n", av[i]);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }
 
-int     diner_launcher(t_table *table)
+int	diner_launcher(t_table *table)
 {
-    int i; 
-    t_human *human; 
-    
-    i = 0;
-    while (i < table->data.elements)
-    {
-        human = malloc(sizeof(t_human));
-        human->index = i; 
-        human->table = table;
-        if ((pthread_create(&table->philos[i].tPhilo, NULL, &philo_life, (void*)human)))
-        {
-            ft_free_safe(human);
-            printf("A thread cannot be create\n");
-            return (0);
-        }
-       i++;
-    }
-    watcher(table);
-    destroy(table);
-    return (i);
+	int		i;
+	t_human	*human;
+
+	i = 0;
+	while (i < table->data.elements)
+	{
+		human = malloc(sizeof(t_human));
+		human->index = i;
+		human->table = table;
+		if ((pthread_create(&table->philos[i].tPhilo, NULL, &philo_life,
+					(void*)human)))
+		{
+			ft_free_safe(human);
+			printf("A thread cannot be create\n");
+			return (0);
+		}
+		i++;
+	}
+	watcher(table);
+	destroy(table);
+	return (i);
 }
 
-int     main(int ac, char **av)
+int	main(int ac, char **av)
 {
-  t_table table;
+	t_table	table;
 
-    if (init_data(&table.data, ac, av))
-        return(-1);
-    table.philos = init_philos(table.data);
-    table.forks = init_forks(table.data);
-    g_isDead = false;
-    fork_dispatch(&table);
-    diner_launcher(&table);
-    return (0);
+	if (init_data(&table.data, ac, av))
+		return (-1);
+	table.philos = init_philos(table.data);
+	table.forks = init_forks(table.data);
+	g_isDead = false;
+	fork_dispatch(&table);
+	diner_launcher(&table);
+	return (0);
 }

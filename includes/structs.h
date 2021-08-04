@@ -6,59 +6,51 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 20:01:21 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/03 20:01:44 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/04 15:20:21 by lucasseha        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-#include <stdio.h> 
-#include <pthread.h> 
-#include <unistd.h> 
-#include <stdlib.h> 
-#include <sys/time.h>
-#include "philo.h"
+# include "philo.h"
 
-
-bool  g_isDead;
+bool	g_isDead;
 
 typedef struct t_philo
 {
-    int index;
-    pthread_mutex_t *forkLeft;
-    pthread_mutex_t *forkRight;
-    int numEat;
-    unsigned long lastEat;
-    char PIO;
-    pthread_t tPhilo;
-}               t_philo;
+	int				index;
+	pthread_mutex_t	*forkLeft;
+	pthread_mutex_t	*forkRight;
+	int				numEat;
+	unsigned long	lastEat;
+	char			PIO;
+	pthread_t		tPhilo;
+}				t_philo;
 
 typedef struct t_data
 {
-    int elements;
-    unsigned long timeDie;
-    unsigned long timeEat;
-    unsigned long timeSleep;
-    int maxEat;
-    unsigned long realtime;
-    pthread_mutex_t monitor;
-    pthread_mutex_t time;
-}              t_data;
+	int				elements;
+	unsigned long	timeDie;
+	unsigned long	timeEat;
+	unsigned long	timeSleep;
+	int				maxEat;
+	unsigned long	realtime;
+	pthread_mutex_t	monitor;
+	pthread_mutex_t	time;
+}				t_data;
 
 typedef struct t_table
 {
-    t_data data;
-    pthread_mutex_t *forks;
-    t_philo *philos;
-}               t_table;
+	t_data			data;
+	pthread_mutex_t	*forks;
+	t_philo			*philos;
+}				t_table;
 
-typedef struct {
-    t_table *table;
-    int index;
-} t_human;
-
-
-
+typedef struct t_human
+{
+	t_table	*table;
+	int		index;
+}	t_human;
 
 #endif 
