@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:01:34 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/04 13:59:41 by lucasseha        ###   ########.fr       */
+/*   Updated: 2021/08/04 21:37:24 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	init_data(t_data *data, int ac, char **av)
 {
 	if (arg_checker(ac, av))
 		return (1);
+	
 	data->realtime = realtime();
 	data->timeDie = (unsigned long)ft_atoi(av[2]);
 	data->timeEat = (unsigned long)ft_atoi(av[3]);

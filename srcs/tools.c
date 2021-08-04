@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:53:08 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/04 21:13:06 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/04 21:28:13 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ bool	watcher(t_table *table)
 				&& table->data.maxEat != -1 )
 			{	
 				maxEatPhilo++;
-				puts("test ici");
 				table->philos[i].numEat = -2;
 			}
 			// if ((table->philos[i].numEat > table->data.maxEat)
