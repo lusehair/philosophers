@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:52:14 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/04 21:14:40 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/07 16:04:45 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,7 @@ void	*philo_life(void *tab)
 		if_take_two_fork(table, index);
 		is_eating(table, index);
 		if(table->philos[index].numEat == -1)
-		{
-			//puts("not here");
 			break;
-		}
 		is_sleep(table, index);
 	}
 	pthread_mutex_unlock(table->philos[index].forkRight);

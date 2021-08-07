@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:53:08 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/04 21:28:13 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/07 16:44:59 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,11 @@ bool	watcher(t_table *table)
 				g_isDead = true;
 				break ;
 			}
-			if ((table->philos[i].numEat == -1)
-				&& table->data.maxEat != -1 )
+			if (table->philos[i].numEat == -1 && table->data.maxEat != -1)
 			{	
 				maxEatPhilo++;
 				table->philos[i].numEat = -2;
 			}
-			// if ((table->philos[i].numEat > table->data.maxEat)
-			// 	&& table->data.maxEat != -1 )
-			// {	
-			// 	maxEatPhilo++;
-			// }
 			i++;
 			if (maxEatPhilo == table->data.elements && table->data.maxEat != -1)
 				g_isDead = true;
