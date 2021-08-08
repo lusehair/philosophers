@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 20:01:21 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/04 15:20:21 by lucasseha        ###   ########.fr       */
+/*   Updated: 2021/08/08 14:35:01 by lucasseha        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct t_table
 	t_data			data;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
+	int				countmax;
 }				t_table;
 
 typedef struct t_human

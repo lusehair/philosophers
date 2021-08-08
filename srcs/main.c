@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:58:38 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/07 17:16:07 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/07 19:26:27 by lucasseha        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int	destroy(t_table *table)
 	if (table->data.elements == 1)
 	{
 		pthread_detach(table->philos[i].tPhilo);
-							pthread_join(table->philos[i].tPhilo, NULL);
-
+		pthread_join(table->philos[i].tPhilo, NULL);
 	}
 	while (i < table->data.elements)
 	{
@@ -89,6 +88,7 @@ int	diner_launcher(t_table *table)
 	t_human	*human;
 
 	i = 0;
+	table->countmax = 1;
 	while (i < table->data.elements)
 	{
 		human = malloc(sizeof(t_human));
@@ -103,7 +103,7 @@ int	diner_launcher(t_table *table)
 		}
 		i++;
 	}
-	watcher(table);
+	g_isDead = watcher(table);
 	destroy(table);
 	return (i);
 }
@@ -115,11 +115,11 @@ int	main(int ac, char **av)
 	table = malloc(sizeof(t_table));
 	if (init_data(&table->data, ac, av))
 		return (-1);
-	if(table->data.elements < 2)
+	if (table->data.elements < 2)
 	{
 		printf("Error :Must be 2 or more philosopher\n");
 		free(table);
-		return(0);
+		return (0);
 	}
 	table->philos = init_philos(table->data);
 	table->forks = init_forks(table->data);
