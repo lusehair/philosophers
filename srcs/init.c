@@ -6,13 +6,13 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:01:34 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/16 18:31:46 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/16 23:44:45 by lucasseha        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	fork_dispatch(s_table *table)
+void	fork_dispatch(t_table *table)
 {
 	int	p;
 	int	f;
@@ -30,13 +30,13 @@ void	fork_dispatch(s_table *table)
 	}
 }
 
-s_philo	*inis_philos(s_data data)
+t_philo	*inis_philos(t_data data)
 {
-	s_philo	*philos;
+	t_philo	*philos;
 	int		i;
 
 	i = 0;
-	philos = malloc(sizeof(s_philo) * data.elements);
+	philos = malloc(sizeof(t_philo) * data.elements);
 	if (philos == NULL)
 		return (NULL);
 	while (i < data.elements)
@@ -55,7 +55,7 @@ s_philo	*inis_philos(s_data data)
 	return (philos);
 }
 
-int	inis_data(s_data *data, int ac, char **av)
+int	inis_data(t_data *data, int ac, char **av)
 {
 	if (arg_checker(ac, av))
 		return (1);
@@ -77,7 +77,7 @@ int	inis_data(s_data *data, int ac, char **av)
 	return (0);
 }
 
-pthread_mutex_t	*init_forks(s_data data)
+pthread_mutex_t	*init_forks(t_data data)
 {
 	int				i;
 	int				ret;
@@ -85,8 +85,8 @@ pthread_mutex_t	*init_forks(s_data data)
 
 	i = 0;
 	forks = malloc(sizeof(pthread_mutex_t) * data.elements);
-	if(forks == NULL)
-		return(NULL);
+	if (forks == NULL)
+		return (NULL);
 	while (i < data.elements)
 	{
 		ret = pthread_mutex_init(&forks[i], NULL);

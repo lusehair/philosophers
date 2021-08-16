@@ -6,13 +6,13 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:52:14 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/16 18:27:37 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/16 23:49:24 by lucasseha        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	if_take_one_fork(s_table *table, int index)
+int	if_take_one_fork(t_table *table, int index)
 {
 	int	ret;
 
@@ -30,7 +30,7 @@ int	if_take_one_fork(s_table *table, int index)
 	return (ret);
 }
 
-int	if_take_two_fork(s_table *table, int index)
+int	if_take_two_fork(t_table *table, int index)
 {
 	int	ret;
 
@@ -48,31 +48,31 @@ int	if_take_two_fork(s_table *table, int index)
 	return (ret);
 }
 
-int	is_eating(s_table *table, int index)
+int	is_eating(t_table *table, int index)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
-	if(table->data.elements == 1)
-		return(ret);
+	if (table->data.elements == 1)
+		return (ret);
 	if (table->data.maxEat != -1)
 	{
 		if (table->philos[index].numEat == table->data.maxEat)
 		{
-			m_numeat(table,index, 'W', '-');
+			m_numeat(table, index, 'W', '-');
 			return (0);
 		}
-		m_numeat(table,index,'W','+');
+		m_numeat(table, index, 'W', '+');
 	}
 	monitor(table, index, "is eating");
-	m_numeat(table,index, 'W', 'E');
+	m_numeat(table, index, 'W', 'E');
 	safe_sleep(table, 'E');
 	pthread_mutex_unlock(table->philos[index].forkLeft);
 	pthread_mutex_unlock(table->philos[index].forkRight);
 	return (ret);
 }
 
-int	is_sleep(s_table *table, int index)
+int	is_sleep(t_table *table, int index)
 {
 	monitor(table, index, "is sleeping");
 	safe_sleep(table, 'S');
@@ -82,14 +82,14 @@ int	is_sleep(s_table *table, int index)
 void	*philo_life(void *tab)
 {
 	int		index;
-	s_human	*human;
-	s_table	*table;
+	t_human	*human;
+	t_table	*table;
 
 	human = tab;
 	table = human->table;
 	index = human->index;
 	ft_free_safe(human);
-	m_numeat(table,index, 'W', 'E');
+	m_numeat(table, index, 'W', 'E');
 	if (table->philos[index].PIO == 'P')
 		is_sleep(table, index);
 	while (!(m_isdead(table, 'R')))
@@ -98,7 +98,7 @@ void	*philo_life(void *tab)
 		if_take_one_fork(table, index);
 		if_take_two_fork(table, index);
 		is_eating(table, index);
-		if (m_numeat(table,index,'R', 'N') == -1)
+		if (m_numeat(table, index, 'R', 'N') == -1)
 			break ;
 		is_sleep(table, index);
 	}

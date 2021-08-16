@@ -6,13 +6,13 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:58:38 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/16 18:29:23 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/16 23:47:03 by lucasseha        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	destroy(s_table *table)
+int	destroy(t_table *table)
 {
 	int	i;
 
@@ -23,7 +23,7 @@ int	destroy(s_table *table)
 	{
 		if (table->data.elements > 1)
 			pthread_join(table->philos[i].tPhilo, NULL);
-		if(table->data.elements == 1)
+		if (table->data.elements == 1)
 			pthread_mutex_destroy(&table->forks[i]);
 		i++;
 	}
@@ -80,18 +80,18 @@ int	value_checker(int ac, char **av)
 	return (0);
 }
 
-int	diner_launcher(s_table *table)
+int	diner_launcher(t_table *table)
 {
 	int		i;
-	s_human	*human;
+	t_human	*human;
 
 	i = 0;
 	table->countmax = 1;
 	while (i < table->data.elements)
 	{
-		human = malloc(sizeof(s_human));
-		if(human == NULL)
-			return(-1);
+		human = malloc(sizeof(t_human));
+		if (human == NULL)
+			return (-1);
 		human->index = i;
 		human->table = table;
 		if ((pthread_create(&table->philos[i].tPhilo, NULL, &philo_life,
@@ -104,7 +104,7 @@ int	diner_launcher(s_table *table)
 		i++;
 	}
 	watcher(table);
-	m_isdead(table,'W');
+	m_isdead(table, 'W');
 	destroy(table);
 	ft_free_safe(human);
 	return (i);
@@ -112,17 +112,17 @@ int	diner_launcher(s_table *table)
 
 int	main(int ac, char **av)
 {
-	s_table	*table;
+	t_table	*table;
 
-	table = malloc(sizeof(s_table));
-	if(table == NULL)
-		return(1);
+	table = malloc(sizeof(t_table));
+	if (table == NULL)
+		return (1);
 	if (inis_data(&table->data, ac, av))
 		return (1);
 	table->philos = inis_philos(table->data);
 	table->forks = init_forks(table->data);
-	if(table->philos == NULL || table->forks == NULL)
-		return(1);
+	if (table->philos == NULL || table->forks == NULL)
+		return (1);
 	fork_dispatch(table);
 	diner_launcher(table);
 	free(table);

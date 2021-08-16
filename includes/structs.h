@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 20:01:21 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/16 15:09:30 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/16 23:58:27 by lucasseha        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define STRUCTS_H
 
 # include "philo.h"
-
-bool	g_isDead;
-
 
 typedef struct s_philo
 {
@@ -27,8 +24,8 @@ typedef struct s_philo
 	unsigned long	lastEat;
 	char			PIO;
 	pthread_t		tPhilo;
-	pthread_mutex_t muteat;
-}				s_philo;
+	pthread_mutex_t	muteat;
+}				t_philo;
 
 typedef struct s_data
 {
@@ -38,24 +35,24 @@ typedef struct s_data
 	unsigned long	timeSleep;
 	int				maxEat;
 	unsigned long	realtime;
-	int 			isdead;
+	int				isdead;
 	pthread_mutex_t	monitor;
 	pthread_mutex_t	time;
-	pthread_mutex_t mdead;
-}				s_data;
+	pthread_mutex_t	mdead;
+}				t_data;
 
 typedef struct s_table
 {
-	s_data			data;
+	t_data			data;
 	pthread_mutex_t	*forks;
-	s_philo			*philos;
+	t_philo			*philos;
 	int				countmax;
-}				s_table;
+}				t_table;
 
 typedef struct s_human
 {
-	s_table	*table;
+	t_table	*table;
 	int		index;
-}	s_human;
+}	t_human;
 
 #endif 
