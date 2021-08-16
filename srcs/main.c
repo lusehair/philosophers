@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:58:38 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/16 23:47:03 by lucasseha        ###   ########.fr       */
+/*   Updated: 2021/08/16 22:17:12 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ int	diner_launcher(t_table *table)
 	watcher(table);
 	m_isdead(table, 'W');
 	destroy(table);
-	ft_free_safe(human);
 	return (i);
 }
 
