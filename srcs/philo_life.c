@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:52:14 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/07 19:27:05 by lucasseha        ###   ########.fr       */
+/*   Updated: 2021/08/12 15:16:31 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	if_take_two_fork(t_table *table, int index)
 		ret = pthread_mutex_lock(table->philos[index].forkLeft);
 	else
 		ret = pthread_mutex_lock(table->philos[index].forkRight);
+	if (ret == 0)
+		monitor(table, index, "has taken a fork");
 	return (ret);
 }
 

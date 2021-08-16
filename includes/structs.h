@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 20:01:21 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/08 14:35:01 by lucasseha        ###   ########.fr       */
+/*   Updated: 2021/08/16 13:16:02 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "philo.h"
 
 bool	g_isDead;
+
 
 typedef struct t_philo
 {

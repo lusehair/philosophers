@@ -6,11 +6,13 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:58:38 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/07 19:26:27 by lucasseha        ###   ########.fr       */
+/*   Updated: 2021/08/16 13:15:46 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+
 
 int	destroy(t_table *table)
 {
@@ -92,6 +94,8 @@ int	diner_launcher(t_table *table)
 	while (i < table->data.elements)
 	{
 		human = malloc(sizeof(t_human));
+		if(human == NULL)
+			return(-1);
 		human->index = i;
 		human->table = table;
 		if ((pthread_create(&table->philos[i].tPhilo, NULL, &philo_life,
@@ -110,19 +114,19 @@ int	diner_launcher(t_table *table)
 
 int	main(int ac, char **av)
 {
+	
+
 	t_table	*table;
 
 	table = malloc(sizeof(t_table));
+	if(table == NULL)
+		return(1);
 	if (init_data(&table->data, ac, av))
-		return (-1);
-	if (table->data.elements < 2)
-	{
-		printf("Error :Must be 2 or more philosopher\n");
-		free(table);
-		return (0);
-	}
+		return (1);
 	table->philos = init_philos(table->data);
 	table->forks = init_forks(table->data);
+	if(table->philos == NULL || table->forks == NULL)
+		return(1);
 	g_isDead = false;
 	fork_dispatch(table);
 	diner_launcher(table);

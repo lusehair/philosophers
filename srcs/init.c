@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:01:34 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/08 14:40:29 by lucasseha        ###   ########.fr       */
+/*   Updated: 2021/08/16 13:04:24 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ pthread_mutex_t	*init_forks(t_data data)
 
 	i = 0;
 	forks = malloc(sizeof(pthread_mutex_t) * data.elements);
+	if(forks == NULL)
+		return(NULL);
 	while (i < data.elements)
 	{
 		ret = pthread_mutex_init(&forks[i], NULL);
