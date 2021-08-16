@@ -6,7 +6,7 @@
 #    By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/05 15:41:26 by lusehair          #+#    #+#              #
-#    Updated: 2021/08/12 12:03:29 by lusehair         ###   ########.fr        #
+#    Updated: 2021/08/16 18:31:36 by lusehair         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ OBJ_DIR = objs
 
 CC = gcc
 CFLAGS += -Wall -Werror -Wextra -pthread
-#CFLAGS += -g3 -fsanitize=leak
-#CFLAGS += -g3 
+#CFLAGS += -g3 -fsanitize=thread
+CFLAGS += -pthread
 HEADER_FILE = $(HEADER_DIR)/philo.h \
 			  $(HEADER_DIR)/structs.h
 
@@ -28,6 +28,9 @@ SRC_FILE = $(SRC_DIR)/init.c \
 			$(SRC_DIR)/philo_life.c \
 			$(SRC_DIR)/main.c \
 			$(SRC_DIR)/libft.c \
+			$(SRC_DIR)/mutex.c \
+
+
 
 OBJ = $(SRC_FILE:%.c=%.o)
 

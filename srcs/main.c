@@ -6,29 +6,25 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:58:38 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/16 13:15:46 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/16 18:29:23 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-
-
-int	destroy(t_table *table)
+int	destroy(s_table *table)
 {
 	int	i;
 
 	i = 0;
 	if (table->data.elements == 1)
-	{
-		pthread_detach(table->philos[i].tPhilo);
 		pthread_join(table->philos[i].tPhilo, NULL);
-	}
 	while (i < table->data.elements)
 	{
 		if (table->data.elements > 1)
 			pthread_join(table->philos[i].tPhilo, NULL);
-		pthread_mutex_destroy(&table->forks[i]);
+		if(table->data.elements == 1)
+			pthread_mutex_destroy(&table->forks[i]);
 		i++;
 	}
 	pthread_mutex_destroy(&table->data.monitor);
@@ -84,16 +80,16 @@ int	value_checker(int ac, char **av)
 	return (0);
 }
 
-int	diner_launcher(t_table *table)
+int	diner_launcher(s_table *table)
 {
 	int		i;
-	t_human	*human;
+	s_human	*human;
 
 	i = 0;
 	table->countmax = 1;
 	while (i < table->data.elements)
 	{
-		human = malloc(sizeof(t_human));
+		human = malloc(sizeof(s_human));
 		if(human == NULL)
 			return(-1);
 		human->index = i;
@@ -107,27 +103,26 @@ int	diner_launcher(t_table *table)
 		}
 		i++;
 	}
-	g_isDead = watcher(table);
+	watcher(table);
+	m_isdead(table,'W');
 	destroy(table);
+	ft_free_safe(human);
 	return (i);
 }
 
 int	main(int ac, char **av)
 {
-	
+	s_table	*table;
 
-	t_table	*table;
-
-	table = malloc(sizeof(t_table));
+	table = malloc(sizeof(s_table));
 	if(table == NULL)
 		return(1);
-	if (init_data(&table->data, ac, av))
+	if (inis_data(&table->data, ac, av))
 		return (1);
-	table->philos = init_philos(table->data);
+	table->philos = inis_philos(table->data);
 	table->forks = init_forks(table->data);
 	if(table->philos == NULL || table->forks == NULL)
 		return(1);
-	g_isDead = false;
 	fork_dispatch(table);
 	diner_launcher(table);
 	free(table);

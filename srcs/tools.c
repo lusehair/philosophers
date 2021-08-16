@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:53:08 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/08 14:39:30 by lucasseha        ###   ########.fr       */
+/*   Updated: 2021/08/16 17:46:00 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ unsigned long	realtime(void)
 	return (ret);
 }
 
-unsigned long	instanttime(t_table *table)
+unsigned long	instanttime(s_table *table)
 {
 	unsigned long	ret;
 
@@ -33,7 +33,7 @@ unsigned long	instanttime(t_table *table)
 	return (ret);
 }
 
-void	safe_sleep(t_table *table, char type)
+void	safe_sleep(s_table *table, char type)
 {
 	unsigned long	endSleep;
 
@@ -45,39 +45,39 @@ void	safe_sleep(t_table *table, char type)
 		usleep(300);
 }
 
-void	monitor(t_table *table, int index, char *msg)
+void	monitor(s_table *table, int index, char *msg)
 {
-	pthread_mutex_lock(&table->data.monitor);
-	if (g_isDead == false)
+	pthread_mutex_lock(&table->data.monitor);	
+	if(!(m_isdead(table, 'R')))
 		printf("%ld ms philo %d %s\n", instanttime(table), index + 1, msg);
 	pthread_mutex_unlock(&table->data.monitor);
 }
 
-bool	watcher(t_table *table)
+bool	watcher(s_table *table)
 {
 	int	i;
 
-	while (g_isDead == false)
+	while(!(m_isdead(table, 'R')))
 	{
 		i = 0;
 		while (i < table->data.elements)
 		{
-			if ((instanttime(table) - table->philos[i].lastEat
-					> table->data.timeDie && table->philos[i].numEat >= 0))
+			if((instanttime(table) - m_numeat(table, i, 'R', 'E')
+					> table->data.timeDie && m_numeat(table, i, 'R', 'N') >= 0))
 			{
-				monitor(table, i, "died");
-				return (true);
+					monitor(table, i, "died");
+				return (1);
 			}
-			if (table->philos[i].numEat == -1 && table->data.maxEat != -1)
+			if (m_numeat(table, i, 'R', 'N') == -1 && table->data.maxEat != -1)
 			{	
 				table->countmax++;
-				table->philos[i].numEat = -2;
+				m_numeat(table, i, 'W', 'D');
 			}
 			i++;
 			if (table->countmax == table->data.elements && table->data.maxEat
 				!= -1)
-				g_isDead = true;
+				m_isdead(table, 'W');
 		}
 	}
-	return (true);
+	return (m_isdead(table, 'W'));
 }
