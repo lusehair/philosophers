@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:01:34 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/16 23:44:45 by lucasseha        ###   ########.fr       */
+/*   Updated: 2021/08/17 12:19:53 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_philo	*inis_philos(t_data data)
 		return (NULL);
 	while (i < data.elements)
 	{
-		philos[i].index = i;
+		philos[i].index = 0;
 		if (i % 2)
 			philos[i].PIO = 'I';
 		else

@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:58:38 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/17 11:21:34 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/17 12:46:30 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	diner_launcher(t_table *table)
 	t_human	*human;
 
 	i = 0;
-	table->countmax = 1;
+	table->countmax = 0;
 	while (i < table->data.elements)
 	{
 		human = malloc(sizeof(t_human));
@@ -101,6 +101,8 @@ int	diner_launcher(t_table *table)
 			printf("A thread cannot be create\n");
 			return (0);
 		}
+					//ft_free_safe(human);
+
 		i++;
 	}
 	watcher(table);
