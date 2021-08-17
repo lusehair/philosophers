@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:53:08 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/16 23:43:24 by lucasseha        ###   ########.fr       */
+/*   Updated: 2021/08/17 08:31:07 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,12 @@ void	safe_sleep(t_table *table, char type)
 
 	if (type == 'S')
 		endSleep = instanttime(table) + table->data.timeSleep;
-	else
+	
+	else if (type == 'K')
+		endSleep = instanttime(table) + table->data.timeDie;
+	else 
 		endSleep = instanttime(table) + table->data.timeEat;
+	
 	while (instanttime(table) < endSleep)
 		usleep(300);
 }

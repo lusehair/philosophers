@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:52:14 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/16 23:49:24 by lucasseha        ###   ########.fr       */
+/*   Updated: 2021/08/17 08:31:16 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	if_take_one_fork(t_table *table, int index)
 	int	ret;
 
 	ret = 0;
-	if (table->data.elements == 1)
-		return (ret);
+	// if (table->data.elements == 1)
+	// 	return (ret);
 	if (m_isdead(table, 'R'))
 		return (-1);
 	if (table->philos[index].PIO == 'I')
@@ -36,7 +36,11 @@ int	if_take_two_fork(t_table *table, int index)
 
 	ret = 0;
 	if (table->data.elements == 1)
-		return (ret);
+	{
+		pthread_mutex_unlock(table->philos[index].forkRight);
+		safe_sleep(table, 'K');
+		return (0);
+	}
 	if (m_isdead(table, 'R'))
 		return (-1);
 	if (table->philos[index].PIO == 'I')
