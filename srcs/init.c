@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:01:34 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/17 12:19:53 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/17 14:55:28 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ void	fork_dispatch(t_table *table)
 
 	p = 1;
 	f = 0;
+	if (table->data.elements == 1)
+	{
+		table->philos[0].forkRight = &table->forks[0];
+		return ;
+	}
 	table->philos[0].forkRight = &table->forks[table->data.elements - 1 ];
 	table->philos[0].forkLeft = &table->forks[0];
 	while (p < table->data.elements)

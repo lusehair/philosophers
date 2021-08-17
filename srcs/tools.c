@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:53:08 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/17 14:04:38 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/17 15:28:34 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	safe_sleep(t_table *table, char type)
 		endSleep = instanttime(table) + table->data.timeSleep;
 	else if (type == 'K')
 		endSleep = instanttime(table) + table->data.timeDie + 100;
+	else if(type == 'B')
+		endSleep = instanttime(table) + (table->data.timeSleep / 2);
 	else
 		endSleep = instanttime(table) + table->data.timeEat;
 	while (instanttime(table) < endSleep)
@@ -66,15 +68,8 @@ bool	watcher(t_table *table)
 		i = 0;
 		while (i < table->data.elements)
 		{
-			if ((instanttime(table) - m_numeat(table, i, 'R', 'E')
-					> table->data.timeDie && (m_numeat(table, i, 'R', 'N') != table->data.maxEat)))
-			{
-				if(!(table->data.maxEat != -1 && m_numeat(table, i, 'R', 'N') != table->data.maxEat))
-				{
-					monitor(table, i, "died");
-					return (1);
-				}
-			}
+			if (the_death(table,i))
+				return (1);
 			if (m_numeat(table, i, 'R', 'N') == -1 && table->data.maxEat != -1)
 			{	
 				table->countmax++;
