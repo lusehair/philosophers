@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:58:38 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/17 12:46:30 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/17 17:46:15 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ int	diner_launcher(t_table *table)
 			printf("A thread cannot be create\n");
 			return (0);
 		}
-					//ft_free_safe(human);
-
 		i++;
 	}
 	watcher(table);

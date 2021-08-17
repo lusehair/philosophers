@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:52:14 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/17 15:28:23 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/17 17:44:41 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	if_take_one_fork(t_table *table, int index)
 	ret = 0;
 	if (m_isdead(table, 'R'))
 		return (-1);
-	if(m_numeat(table,index, 'R', 'N') < 0)
-		return(1);
+	if (m_numeat(table, index, 'R', 'N') < 0)
+		return (1);
 	if (table->philos[index].PIO == 'P')
 		ret = pthread_mutex_lock(table->philos[index].forkRight);
 	else
@@ -42,8 +42,8 @@ int	if_take_two_fork(t_table *table, int index)
 	}
 	if (m_isdead(table, 'R'))
 		return (-1);
-	if(m_numeat(table,index, 'R', 'N') < 0)
-		return(1);
+	if (m_numeat(table, index, 'R', 'N') < 0)
+		return (1);
 	if (table->philos[index].PIO == 'P')
 		ret = pthread_mutex_lock(table->philos[index].forkLeft);
 	else
@@ -72,9 +72,11 @@ int	is_eating(t_table *table, int index)
 	monitor(table, index, "is eating");
 	m_numeat(table, index, 'W', 'E');
 	safe_sleep(table, 'E');
-	if((table->philos[index].index == 1 && table->philos[index].PIO == 'P') || table->philos[index].index == 2)
+	if ((table->philos[index].index == 1 && table->philos[index].PIO == 'P')
+		|| table->philos[index].index == 2)
 		pthread_mutex_unlock(table->philos[index].forkRight);
-	if((table->philos[index].index == 1 && table->philos[index].PIO == 'I') || table->philos[index].index == 2)
+	if ((table->philos[index].index == 1 && table->philos[index].PIO == 'I')
+		|| table->philos[index].index == 2)
 		pthread_mutex_unlock(table->philos[index].forkLeft);
 	table->philos[index].index = 0;
 	return (ret);
@@ -100,12 +102,14 @@ void	*philo_life(void *tab)
 	m_numeat(table, index, 'W', 'E');
 	if (table->philos[index].PIO == 'I')
 		safe_sleep(table, 'B');
-	routine(table,index);
+	routine(table, index);
 	if (m_numeat(table, index, 'R', 'N') == table->data.maxEat)
 		m_numeat(table, index, 'W', '-');
-	if((table->philos[index].index == 1 && table->philos[index].PIO == 'P') || table->philos[index].index == 2)
+	if ((table->philos[index].index == 1 && table->philos[index].PIO == 'P')
+		|| table->philos[index].index == 2)
 		pthread_mutex_unlock(table->philos[index].forkRight);
-	if((table->philos[index].index == 1 && table->philos[index].PIO == 'I') || table->philos[index].index == 2)
+	if ((table->philos[index].index == 1 && table->philos[index].PIO == 'I')
+		|| table->philos[index].index == 2)
 		pthread_mutex_unlock(table->philos[index].forkLeft);
 	m_numeat(table, index, 'W', '-');
 	return (NULL);

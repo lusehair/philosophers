@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:53:08 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/17 15:28:34 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/17 18:20:41 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	safe_sleep(t_table *table, char type)
 		endSleep = instanttime(table) + table->data.timeSleep;
 	else if (type == 'K')
 		endSleep = instanttime(table) + table->data.timeDie + 100;
-	else if(type == 'B')
+	else if (type == 'B')
 		endSleep = instanttime(table) + (table->data.timeSleep / 2);
 	else
 		endSleep = instanttime(table) + table->data.timeEat;
@@ -68,7 +68,7 @@ bool	watcher(t_table *table)
 		i = 0;
 		while (i < table->data.elements)
 		{
-			if (the_death(table,i))
+			if (the_death(table, i))
 				return (1);
 			if (m_numeat(table, i, 'R', 'N') == -1 && table->data.maxEat != -1)
 			{	
@@ -77,7 +77,7 @@ bool	watcher(t_table *table)
 			}
 			i++;
 			if ((table->countmax == table->data.elements) && (table->data.maxEat
-				!= -1))
+					!= -1))
 				m_isdead(table, 'W');
 		}
 	}

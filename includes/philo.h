@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:15:57 by lucasseha         #+#    #+#             */
-/*   Updated: 2021/08/17 15:20:29 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/17 18:21:32 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ int				ft_isdigit(int c);
 
 int				m_isdead(t_table *table, char mode);
 int				m_numeat(t_table *table, int index, char mode, char arg);
-int             the_death(t_table *table, int i);
-void            routine(t_table *table, int index);
+int				the_death(t_table *table, int i);
+void			routine(t_table *table, int index);
 
 /*
 // MAIN.C

@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 18:30:45 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/17 15:19:02 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/17 18:19:32 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	m_isdead(t_table *table, char mode)
 	return (ret);
 }
 
-
 void	routine(t_table *table, int index)
 {
 	while (!(m_isdead(table, 'R')))
@@ -64,16 +63,18 @@ void	routine(t_table *table, int index)
 	return ;
 }
 
-int		the_death(t_table *table, int i)
+int	the_death(t_table *table, int i)
 {
 	if ((instanttime(table) - m_numeat(table, i, 'R', 'E')
-					> table->data.timeDie && (m_numeat(table, i, 'R', 'N') != table->data.maxEat)))
-			{
-				if(!(table->data.maxEat != -1 && m_numeat(table, i, 'R', 'N') != table->data.maxEat))
-				{
-					monitor(table, i, "died");
-					return (1);
-				}
-			}
+			> table->data.timeDie && (m_numeat(table, i, 'R', 'N')
+				!= table->data.maxEat)))
+	{
+		if (!(table->data.maxEat != -1 && m_numeat(table, i, 'R', 'N')
+				!= table->data.maxEat))
+		{
+			monitor(table, i, "died");
+			return (1);
+		}
+	}
 	return (0);
 }
