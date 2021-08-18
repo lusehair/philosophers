@@ -6,7 +6,7 @@
 #    By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/05 15:41:26 by lusehair          #+#    #+#              #
-#    Updated: 2021/08/17 18:25:31 by lusehair         ###   ########.fr        #
+#    Updated: 2021/08/18 14:08:27 by lusehair         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ OBJ_DIR = objs
 
 CC = gcc
 CFLAGS += -Wall -Werror -Wextra -pthread
-CFLAGS += -g3 -fsanitize=thread
-CFLAGS += -pthread
+CFLAGS += -g3
+CFLAGS += -fsanitize=thread
 HEADER_FILE = $(HEADER_DIR)/philo.h \
 			  $(HEADER_DIR)/structs.h
 

@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 13:53:08 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/17 18:20:41 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/18 14:10:16 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,12 @@ void	safe_sleep(t_table *table, char type)
 	else
 		endSleep = instanttime(table) + table->data.timeEat;
 	while (instanttime(table) < endSleep)
-		usleep(300);
+	{
+		if (m_isdead(table,'R'))
+			return ;
+		usleep(10);
+	}
+
 }
 
 void	monitor(t_table *table, int index, char *msg)

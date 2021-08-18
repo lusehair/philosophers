@@ -6,7 +6,7 @@
 /*   By: lusehair <lusehair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 18:30:45 by lusehair          #+#    #+#             */
-/*   Updated: 2021/08/17 18:19:32 by lusehair         ###   ########.fr       */
+/*   Updated: 2021/08/18 14:06:33 by lusehair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	routine(t_table *table, int index)
 		if (m_numeat(table, index, 'R', 'N') == table->data.maxEat)
 			break ;
 		monitor(table, index, "is thinking");
+		
 		if_take_one_fork(table, index);
 		if_take_two_fork(table, index);
 		is_eating(table, index);
